@@ -40,6 +40,13 @@ $data_alutsista = $conn->query($items);
     </ul>    
     </div>
 
+      
+    <div class="content">
+        <ul>
+            <li><a href="../inputdata/form_input_data.html" class="button-link">Tambah</a></li>
+        </ul>
+    </div>
+
     <section class="m-5">
 
         <div class="card-container" > 
@@ -49,7 +56,7 @@ $data_alutsista = $conn->query($items);
             ?>
             
             <div class="col-sm-4">   
-              <a href="http://localhost/ALUTSISTA_PPL/detail/detail.html" style="text-decoration: none;">
+              <a href="http://localhost/ALUTSISTA_PPL/detail/detail.php" style="text-decoration: none;">
               <div class="card p-3">
                   <div class="image" >
                     <img src="../<?php echo $item['gambar']; ?>" alt="Item Image" style="width:375px;  height:275px;">

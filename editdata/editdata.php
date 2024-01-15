@@ -36,7 +36,7 @@
       </nav>
 <section class="content">
 
-    <form action="../editdata.php" method="post" enctype="multipart/form-data">
+    <form action="../editdata/editdata.php" method="post" enctype="multipart/form-data">
         <div class="input-data">
             <h1>EDIT ALUTSISTA</h1><br>
             <label for="">No Seri</label>

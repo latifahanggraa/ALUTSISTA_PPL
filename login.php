@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $_SESSION["user_id"] = $row["id"];
             $_SESSION["user_name"] = $row["nama"];
-            header("Location: http://localhost/ALUTSISTA/home/index.html");
+            header("Location: http://localhost/ALUTSISTA_PPL/home/index.html");
             exit();
         } else {
            echo "<script>alert('Password salah.')</script>";
