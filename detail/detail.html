@@ -1,0 +1,204 @@
+<?php
+  include "../koneksi.php";
+
+  $items = "SELECT * FROM item_alutsista";
+  $data_alutsista = $conn->query($items);
+  foreach($conn->query($items) as $value){
+    $data_select_alutsista = $value;
+  };
+?>
+
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Alutsista</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <nav class="navbar-brand">
+    <div class="logo">
+      <img src="../asset/icons/logo-alutsista.png" alt="Logo">
+    </div>
+    <div class="search-box">
+      <input type="text" placeholder="Cari">
+    </div>
+    <ul class="nav">
+        <li><a href="../home/index.html">Beranda</li>
+        <li><a href="http://localhost/ALUTSISTA_PPL/daftaraset/daftaraset.php">Aset</li>
+        <li><a href="../tentangkami/index.html">Tentang Alutsista</li>
+      <li>
+          <a class="navbar-brand getstarted scrollto">
+              <img src="../asset/icons/user.png" style="width: 20px; height: 20px;">
+          </a>                      
+      </li>
+      <li><a class="navbar-link getstarted scrollto" href="logout.php">Logout</a></li>
+  </ul>    
+  </nav>
+
+  <section class="container">
+    <h1>Detail Alutsista</h1>
+    <div class="img-container">
+        <img src="../<?php echo $data_select_alutsista['gambar'];?>"  alt="" style="width: 1193px; height:554px;">
+    </div>
+    <div class="content">
+        <ul id="action">
+            <li><a href="../editdata/editdata.php">Edit</a></li>
+            <li><button id="hapus" onclick="openModal()">Hapus</button></li>
+        </ul>
+
+        <div class="modal" id="deleteConfirmationModal">
+            <div class="modal-content">
+              <img src="../asset/images/Featured icon.png" alt="">
+              <h3>Hapus data ini?</h3>
+              <p>Apakah anda yakin akan menghapus data ini? Aksi ini tidak daat dibatalkan.</p>
+              <button id="modal-close" onclick="closeModal()">Batal</button>
+              <button id="modal-delete" onclick="deleteData()">Hapus</button>
+            </div>
+          </div>          
+    </div>
+    <div class="data">
+        
+        <ul>
+          <h2>Informasi Umum</h2><br>
+            <li>
+                <label id="title">Nomor Seri</label>
+                <label id="no_seri" value="<?php echo $data_select_alutsista['no_seri'] ?>"></label>
+            </li>
+            <li>
+                <label id="tittle">Kategori</label>
+                <label id="kategori" value="<?php echo $data_select_alutsista['kategori'] ?>">Pesawat Tempur</label>
+            </li>
+            <li>
+                <label id="tittle">Nama Item</label>
+                <label id="nama_item" value="<?php echo $data_select_alutsista['nama_item'] ?>">Baik</label>
+            </li>
+            <li>
+                <label id="tittle">Kondisi</label>
+                <label id="kondisi" value="<?php echo $data_select_alutsista['kondisi'] ?>">Kendaraan tempur</label>
+            </li>
+        </ul>
+    </div>
+
+    <div class="data">
+        
+      <ul>
+        <h2>Spesifikasi Alutsista</h2><br>
+          <li>
+              <label id="title">Berat</label>
+              <label id="berat" value="<?php echo $data_select_alutsista['berat'] ?>"></label>
+          </li>
+          <li>
+              <label id="tittle">Kecepatan</label>
+              <label id="kecepatan" value="<?php echo $data_select_alutsista['kecepatan'] ?>">Pesawat Tempur</label>
+          </li>
+          <li>
+              <label id="tittle">Bahan Konstruksi</label>
+              <label id="bahan_konstruksi" value="<?php echo $data_select_alutsista['bahan_konstruksi'] ?>">Baik</label>
+          </li>
+          <li>
+              <label id="tittle">Daya Tembak</label>
+              <label id="daya_tembak" value="<?php echo $data_select_alutsista['daya_tembak'] ?>">Kendaraan tempur</label>
+          </li>
+          <li>
+            <label id="tittle">Kapasitas</label>
+            <label id="kapasitas" value="<?php echo $data_select_alutsista['kapasitas'] ?>">Kendaraan tempur</label>
+        </li>
+      </ul>
+    </div>
+
+    <div class="data" style="padding-top: 70px;">
+        
+      <ul>
+        <h2>Riwayat Alutsista</h2><br>
+          <li>
+              <label id="title">Tanggal Masuk</label>
+              <label id="tanggal_masuk" value="<?php echo $data_select_alutsista['tanggal_masuk'] ?>"></label>
+          </li>
+          <li>
+              <label id="tittle">Lokasi Terkini</label>
+              <label id="lokasi_terkini" value="<?php echo $data_select_alutsista['lokasi_terkini'] ?>">Pesawat Tempur</label>
+          </li>
+          <li>
+              <label id="tittle">Riwayat Penggunaan</label>
+              <label id="riwayat_penggunaan" value="<?php echo $data_select_alutsista['riwayat_penggunaan'] ?>">Baik</label>
+          </li>
+          <li>
+              <label id="tittle">Riwayat Perawatan</label>
+              <label id="riwayat_perawatan" value="<?php echo $data_select_alutsista['riwayat_perawatan'] ?>">Kendaraan tempur</label>
+          </li>
+          <li>
+            <label id="tittle">Stok</label>
+            <label id="stok" value="<?php echo $data_select_alutsista['stok'] ?>">Kendaraan tempur</label>
+          </li>
+      </ul>
+    </div>
+
+    <div class="footer-content">
+        <h3>Panduan Pengguna</h3>
+        <p id="panduan" value="<?php echo $data_select_alutsista['panduan_penggunaan'] ?>"></p>
+    </div>
+
+
+  </section>
+
+  <div class="footer">
+    Copyright © PT Perdana Indo 2023
+  </div>
+
+  <script>
+    function openModal() {
+      document.getElementById('deleteConfirmationModal').style.display = 'block';
+    }
+  
+    function closeModal() {
+      document.getElementById('deleteConfirmationModal').style.display = 'none';
+    }
+  
+    function deleteData() {
+      // Add your delete logic here
+      // For now, let's just close the modal
+      closeModal();
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+    // Tautan menu
+    var informasiUmumLink = document.querySelector('a[href="#informasi-umum"]');
+    var spesifikAlatLink = document.querySelector('a[href="#spesifik-alat"]');
+    var riwayatAlutsistaLink = document.querySelector('a[href="#riwayat-alutsista"]');
+
+    // Div data
+    var informasiUmumDiv = document.getElementById('informasi-umum');
+    var spesifikAlatDiv = document.getElementById('spesifik-alat');
+    var riwayatAlutsistaDiv = document.getElementById('riwayat-alutsista');
+
+    // Menampilkan informasi umum saat halaman dimuat
+    informasiUmumDiv.style.display = 'block';
+
+    // Menambahkan event listener untuk setiap tautan
+    informasiUmumLink.addEventListener('click', function () {
+        informasiUmumDiv.style.display = 'block';
+        spesifikAlatDiv.style.display = 'none';
+        riwayatAlutsistaDiv.style.display = 'none';
+    });
+
+    spesifikAlatLink.addEventListener('click', function () {
+        informasiUmumDiv.style.display = 'none';
+        spesifikAlatDiv.style.display = 'block';
+        riwayatAlutsistaDiv.style.display = 'none';
+    });
+
+    riwayatAlutsistaLink.addEventListener('click', function () {
+        informasiUmumDiv.style.display = 'none';
+        spesifikAlatDiv.style.display = 'none';
+        riwayatAlutsistaDiv.style.display = 'block';
+    });
+  });
+  </script>
+  
+</body>
+
+</html>

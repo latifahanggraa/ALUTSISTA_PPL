@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Search</title>
+    <style>
+        #searchResults {
+            display: none;
+            border: 1px solid #ccc;
+            max-width: 300px;
+            position: absolute;
+        }
+
+        #searchResults ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #searchResults li {
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        #searchResults li:hover {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<input type="text" id="searchInput" oninput="liveSearch()" placeholder="Search...">
+
+<div id="searchResults">
+    <ul id="resultsList"></ul>
+</div>
+
+<script>
+    function liveSearch() {
+        var input = document.getElementById('searchInput').value;
+        var resultsList = document.getElementById('resultsList');
+
+        // Clear previous results
+        resultsList.innerHTML = '';
+
+        // Fetch data from server
+        fetch(`server.php?input=${input}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0) {
+                    data.forEach(function(result) {
+                        var li = document.createElement('li');
+                        li.textContent = result;
+                        li.addEventListener('click', function() {
+                            document.getElementById('searchInput').value = result;
+                            document.getElementById('searchResults').style.display = 'none';
+                        });
+                        resultsList.appendChild(li);
+                    });
+
+                    document.getElementById('searchResults').style.display = 'block';
+                } else {
+                    document.getElementById('searchResults').style.display = 'none';
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>
+
+</body>
+</html>
