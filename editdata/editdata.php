@@ -31,7 +31,7 @@
 
               </a>                      
           </li>
-          <li><a class="navbar-link getstarted scrollto" href="login.php">Keluar</a></li>
+          <li><a class="navbar-link getstarted scrollto" href="../login/login.html">Keluar</a></li>
       </ul>    
       </nav>
 <section class="content">
