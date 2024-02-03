@@ -58,17 +58,17 @@
                     riwayat_penggunaan = '".$_POST['riwayat_penggunaan']."', 
                     riwayat_perawatan = '".$_POST['riwayat_perawatan']."', 
                     stok = '".$_POST['stok']."',  gambar = '".$foto."' WHERE 
-                    (id_item = '".$_POST['id_item']."')";
+                    (no_seri = '".$_POST["no_seri"]."')";
 
         
         if ($conn->query($sql) === TRUE) {
             $conn->close();
-            create_message("Ubah Data Berhasil", "succcess" , "check");
-            header("location: index.php");
+            //create_message("Ubah Data Berhasil", "succcess" , "check");
+            header("location: http://localhost/ALUTSISTA_PPL/daftaraset/daftaraset.php");
             exit();
         } else {
             $conn->close();
-            create_message("Error: " . $sql . "<br>" . $conn->error,"danger","warning");
+            //create_message("Error: " . $sql . "<br>" . $conn->error,"danger","warning");
             header("location:".$_SERVER['HTTP_REFERER']);
             exit();
         }

@@ -1,7 +1,10 @@
 <?php
 include "../koneksi.php";
 
-$items = "SELECT * FROM item_alutsista";
+// Ambil ID dari URL
+$idItem = isset($_GET['id']) ? $_GET['id'] : 0;
+
+$items = "SELECT * FROM item_alutsista WHERE id_item = $idItem";
 $data_alutsista = $conn->query($items);
 
 // Memastikan query berhasil dijalankan
@@ -21,6 +24,13 @@ $data_select_alutsista = $data_alutsista->fetch_assoc();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Detail Alutsista</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    a {
+      text-decoration: none;
+      color: #000;
+    }
+  </style>
+  <script src="script.js"></script>
 </head>
 
 <body>
@@ -32,15 +42,15 @@ $data_select_alutsista = $data_alutsista->fetch_assoc();
       <input type="text" placeholder="Cari">
     </div>
     <ul class="nav">
-        <li><a href="../home/index.html">Beranda</a></li>
+        <li><a href="http://localhost/ALUTSISTA_PPL/home/index.php">Beranda</a></li>
         <li><a href="http://localhost/ALUTSISTA_PPL/daftaraset/daftaraset.php">Aset</a></li>
-        <li><a href="../tentangkami/index.html">Tentang Alutsista</a></li>
+        <li><a href="http://localhost/ALUTSISTA_PPL/tentangkami/index.html">Tentang Alutsista</a></li>
         <li>
           <a class="navbar-brand getstarted scrollto">
               <img src="../asset/icons/user.png" style="width: 20px; height: 20px;">
           </a>                      
       </li>
-      <li><a class="navbar-link getstarted scrollto" href="../login/login.html">Keluar</a></li>
+      <li><a class="navbar-link getstarted scrollto" href="http://localhost/ALUTSISTA_PPL/login/login.html">Keluar</a></li>
     </ul>    
   </nav>
 
@@ -51,27 +61,27 @@ $data_select_alutsista = $data_alutsista->fetch_assoc();
     </div>
     <div class="content">
         <ul id="action">
-            <li><a href="../editdata/editdata.php">Edit</a></li>
+            <li><a href="http://localhost/ALUTSISTA_PPL/editdata/editdata.php">Edit</a></li>
             <li><button id="hapus" onclick="openModal()">Hapus</button></li>
         </ul>
 
         <div class="modal" id="deleteConfirmationModal">
             <div class="modal-content">
-              <img src="../asset/images/Featured icon.png" alt="">
+              <img src="../asset/Featured-icon.png" alt="">
               <h3>Hapus data ini?</h3>
               <p>Apakah anda yakin akan menghapus data ini? Aksi ini tidak dapat dibatalkan.</p>
               <ul id="action">
-              <li><a href="#" onclick="redirectToEdit()">Edit</a></li>
-              <li><button id="hapus" onclick="openModal()">Hapus</button></li>
-            </ul>
+                <li><button id="closeModal" onclick="closeModal()">Batal</button></li>
+                <li><a href="delete.php?id=<?php echo $data_select_alutsista['id_item'] ?>" id="hapusConfirmationBtn" onclick="deleteData()">Hapus</a></li>
+              </ul>
             </div>
-          </div>          
+        </div>          
     </div>
     <div class="data">    
         <ul>
-            <h2>Informasi Umum</h2><br>
+            <h2>Informasi Umum</h2>
             <li>
-                <label id="title">Nomor Seri</label>
+                <label id="title" style="margin-right: 200px;">Nomor Seri</label><br>
                 <label id="no_seri"><?php echo $data_select_alutsista['no_seri']; ?></label>
             </li>
             <li>
@@ -94,7 +104,7 @@ $data_select_alutsista = $data_alutsista->fetch_assoc();
       <ul>
         <h2>Spesifikasi Alutsista</h2><br>
           <li>
-              <label id="title">Berat</label>
+              <label id="title" style="margin-right: 245px;">Berat</label>
               <label id="berat"><?php echo $data_select_alutsista['berat']; ?></label>
           </li>
           <li>
@@ -121,7 +131,7 @@ $data_select_alutsista = $data_alutsista->fetch_assoc();
       <ul>
         <h2>Riwayat Alutsista</h2><br>
           <li>
-              <label id="title">Tanggal Masuk</label>
+              <label id="title" style="margin-right: 175px;">Tanggal Masuk</label>
               <label id="tanggal_masuk"><?php echo $data_select_alutsista['tanggal_masuk']; ?></label>
           </li>
           <li>
@@ -158,6 +168,10 @@ $data_select_alutsista = $data_alutsista->fetch_assoc();
   <!-- Bagian JavaScript -->
 <script>
     function openModal() {
+      // var confirmation =confirm("Apakah Anda yakin ingin menghapus data ini?");
+      // if (confirmation) {
+      //   deleteData();
+      // }
       document.getElementById('deleteConfirmationModal').style.display = 'block';
     }
   
@@ -176,11 +190,19 @@ $data_select_alutsista = $data_alutsista->fetch_assoc();
           // Handle respon dari server jika diperlukan
           console.log(this.responseText);
           closeModal(); // Tutup modal setelah penghapusan berhasil
+          showDeleteNotification(); // Tampilkan notifikasi hapus
+        }else {
+          console.error('Error deleting data:', this.status, this.statusText );
         }
       };
-      xhr.open("POST", "hapus_data.php", true); // Gantilah 'hapus_data.php' dengan nama file yang menangani penghapusan
+      xhr.open("POST", "delete.php", true); // Gantilah 'hapus_data.php' dengan nama file yang menangani penghapusan
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhr.send("id=" + idToDelete); // Kirim ID yang akan dihapus ke server
+    }
+
+    function showDeleteNotification(){
+      // Tambahkan kode untuk menampilkan notifikasi hapus, misalnya menggunakan alert
+      alert("Data berhasil dihapus!");
     }
 
     // Menambahkan fungsi untuk mengarahkan ke halaman edit

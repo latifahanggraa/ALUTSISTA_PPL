@@ -24,10 +24,10 @@
     }
 
     // check file
-    if (file_exists($target_file)) {
-        echo "Sorry, file already exists.";
-        $error = true;
-    }
+    // if (file_exists($target_file)) {
+    //     echo "Sorry, file already exists.";
+    //     $error = true;
+    // }
 
     // check ukuran foto
     if ($_FILES["gambar"]["size"] > 1000000) {

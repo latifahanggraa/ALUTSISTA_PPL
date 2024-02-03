@@ -98,7 +98,7 @@ body {
   .paragraph {
     margin-left:100px;
     flex: 3;
-    max-width: 55%;
+    max-width: 100%;
   }
   
   .right-image {
@@ -118,11 +118,10 @@ body {
   }
   
   .paragraph {
-    background-color: antiquewhite;
     text-align:justify;
-    width: 900px;
     font-size: 16px;
     line-height: 1.6;
+    margin-bottom: 50px;
   }
   
   .content-container {
@@ -141,7 +140,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh; /* Membuat tinggi container sama dengan tinggi layar */
+    margin-top: 50px;
+    margin-bottom: 50px; /* Membuat tinggi container sama dengan tinggi layar */
   }
   
   .image-container img {

@@ -4,7 +4,11 @@
     padding: 0;
     height: auto;
   }
-  
+
+  a{
+    text-decoration: none;
+    color: #000;
+  }
   .button:first-child {
     margin-left: 0;
   }
@@ -322,7 +326,7 @@
   width: 100%;
   height: 100%;
   overflow: auto;
-  
+
   animation: fadeIn 0.5s ease; /* Apply the fadeIn animation */
 }
 
@@ -335,14 +339,16 @@
   width: 400px;
   height: 268px;
   animation: fadeIn 0.5s ease; /* Apply the fadeIn animation */
-  button {
-    width: 170px;
-    height: 44px;
-    border-radius: 8px;
-  }
+ 
+
   img {
     padding-top: 10px;
   }
+
+  #action{
+    padding-left: 20px;
+  }
+
   h3 {
     padding-top: 0px;
     padding-bottom: 5px;
@@ -384,6 +390,33 @@
   #modal-delete:hover {
     background-color:#44602B ;
   }
+}
+
+.modal-content #closeModal {
+  width: 170px;
+  height: 44px;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.modal-content #hapusConfirmationBtn {
+  background-color: #1E5128;
+  color: #ffff;
+  width: 150px;
+  height: 25px;
+  border-radius: 8px;
+  
+}
+
+
+.modal-content #hapusConfirmationBtn:hover{
+  background-color: #44602B;
+  color: #ffff;
+}
+
+.modal-content #closeModal:hover {
+  background-color: #aeaeae;
+  color: #ffff;
 }
 
 /* Rest of your existing styles... */

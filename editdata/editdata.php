@@ -53,6 +53,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Menjalankan perintah SQL
     if ($conn->query($update_query) === TRUE) {
         echo "Data berhasil diperbarui";
+        header("Location: http://localhost/ALUTSISTA_PPL/daftaraset/daftaraset.php");
+        exit();
     } else {
         echo "Error: " . $update_query . "<br>" . $conn->error;
     }
@@ -79,6 +81,12 @@ $data_select_alutsista = $data_alutsista->fetch_assoc();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=!, initial-scale=1.0">
     <link rel="stylesheet" href="editdata.css">
+    <style>
+        a {
+            text-decoration: none;
+            color: #000;
+        }
+    </style>
     <title>Edit Data</title>
 </head>
 <body>
@@ -90,21 +98,21 @@ $data_select_alutsista = $data_alutsista->fetch_assoc();
         </div>
     
         <ul class="nav">
-            <li><a href="../home/index.html">Beranda</a></li>
+            <li><a href="http://localhost/ALUTSISTA_PPL/home/index.php">Beranda</a></li>
             <li><a href="http://localhost/ALUTSISTA_PPL/daftaraset/daftaraset.php">Aset</a></li>
-            <li><a href="../tentangkami/index.html">Tentang Alutsista</a></li>
+            <li><a href="http://localhost/ALUTSISTA_PPL/tentangkami/index.html">Tentang Alutsista</a></li>
           <li>
               <a class="navbar-brand getstarted scrollto">
                   <img src="../asset/icons/user.png" alt="user" style="width: 20px; height: 20px;">
               </a>                      
           </li>
-          <li><a class="navbar-link getstarted scrollto" href="../login/login.html">Keluar</a></li>
+          <li><a class="navbar-link getstarted scrollto" href="http://localhost/ALUTSISTA_PPL/login/login.html">Keluar</a></li>
       </ul>    
     </nav>
 
 <section class="content">
 
-    <form action="../editdata/editdata.php" method="post" enctype="multipart/form-data">
+    <form action="../edit_data.php" method="post" enctype="multipart/form-data">
         <div class="input-data">
             <h1>EDIT ALUTSISTA</h1><br>
             <label for="">No Seri</label>
